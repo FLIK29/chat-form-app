@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login App</title>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCAYP9aDqxl03zlDMF0A0sdpu9MFnX-mgI",
+      authDomain: "chat-form-app.firebaseapp.com",
+      projectId: "chat-form-app",
+      storageBucket: "chat-form-app.firebasestorage.app",
+      messagingSenderId: "1088172343766",
+      appId: "1:1088172343766:web:7883027f799a6db2e4e477"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function signUp() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(user => alert("Signed up!"))
+        .catch(error => alert(error.message));
+    }
+
+    function logIn() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(user => alert("Logged in!"))
+        .catch(error => alert(error.message));
+    }
+  </script>
+</head>
+<body>
+  <h2>Login or Sign Up</h2>
+  <input type="email" id="email" placeholder="Email"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button onclick="signUp()">Sign Up</button>
+  <button onclick="logIn()">Log In</button>
+</body>
+</html>
