@@ -2,9 +2,11 @@
 <html>
 <head>
   <title>Login App</title>
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-  <script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+
     const firebaseConfig = {
       apiKey: "AIzaSyCAYP9aDqxl03zlDMF0A0sdpu9MFnX-mgI",
       authDomain: "chat-form-app.firebaseapp.com",
@@ -13,25 +15,27 @@
       messagingSenderId: "1088172343766",
       appId: "1:1088172343766:web:7883027f799a6db2e4e477"
     };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
 
-    function signUp() {
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.signUp = function () {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
-      auth.createUserWithEmailAndPassword(email, password)
+      createUserWithEmailAndPassword(auth, email, password)
         .then(user => alert("Signed up!"))
         .catch(error => alert(error.message));
-    }
+    };
 
-    function logIn() {
+    window.logIn = function () {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
-      auth.signInWithEmailAndPassword(email, password)
+      signInWithEmailAndPassword(auth, email, password)
         .then(user => alert("Logged in!"))
         .catch(error => alert(error.message));
-    }
+    };
   </script>
+
 </head>
 <body>
   <h2>Login or Sign Up</h2>
@@ -40,4 +44,6 @@
   <button onclick="signUp()">Sign Up</button>
   <button onclick="logIn()">Log In</button>
 </body>
+</html>
+
 </html>
